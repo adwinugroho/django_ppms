@@ -1,4 +1,8 @@
 from django.shortcuts import render
+from raspberry_pi import get_data
+import bluetooth
+import time
+import datetime
 
 def index(request):
     context = {
@@ -9,11 +13,13 @@ def index(request):
 
 def dashboard(request):
     context = {
-        "title": "Dashboard | Portable Patient Monitoring System",
+        "title": get_data.bd_addr,
     }
+    
     return render(request, "dashboard.html", context)
 
 def patient(request):
+
     context = {
         "title": "Patient | Portable Patient Monitoring System",
     }
