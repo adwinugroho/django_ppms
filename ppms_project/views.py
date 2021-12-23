@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from raspberry_pi import get_data
-import bluetooth
+# from raspberry_pi import get_data
+# import bluetooth
 import time
 import datetime
 
@@ -13,7 +13,7 @@ def index(request):
 
 def dashboard(request):
     context = {
-        "title": get_data.bd_addr,
+        "title": "Dashboard | Portable Patient Monitoring System",
     }
     
     return render(request, "dashboard.html", context)
