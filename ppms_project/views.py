@@ -1,8 +1,14 @@
 from django.shortcuts import render
-# from raspberry_pi import get_data
+from raspberry_pi import get_data
 # import bluetooth
 import time
 import datetime
+
+def about(request):
+    context = {
+        "title": "About | Portable Patient Monitoring System",
+    }
+    return render(request, "about.html", context)
 
 def index(request):
     context = {
@@ -13,10 +19,17 @@ def index(request):
 
 def dashboard(request):
     context = {
-        "title": "Dashboard | Portable Patient Monitoring System",
+        "title": get_data.bd_addr,
     }
     
     return render(request, "dashboard.html", context)
+
+def faq(request):
+    context = {
+        "title": "FAQ | Portable Patient Monitoring System",
+    }
+    return render(request, "faq.html", context)
+
 
 def patient(request):
 
