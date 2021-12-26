@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 <div id="main">
     <header class="mb-3">
@@ -30,21 +30,65 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">About</h4>
+                            <h4 class="card-title">About UMM Hospital</h4>
                         </div>
                         <div class="card-content">
                             <div class="card-body">
+                                <center>
+                                    <a href="/"><img src='{% static "/dist/assets/images/bg/drone_gedung_utama1.jpg" %}'
+                                            style="width: 300px; height: 300px;" alt="umm"></a>
+                                </center>
+                                <h6>Sejarah</h6>
                                 <p>
-                                    PPMS team composed by:
-                                    <ul>
-                                        <li>Prof. Dr. Ir. Mauridhi Hery Purnomo, M.Eng, act as team leader</li>
-                                        <li>Diah Risqiwati, act as co-applicant</li>
-                                        <li>Wiwik Anggraeni, act as secretary project.</li>
-                                        <li>Lailatul Husniah. act as secretary treasure officer.</li>
-                                        <li>Sugiyanto, act as hardware engineer.</li>
-                                        <li>Hanugra Aulia Sidharta, act as software engineer.</li>
-                                        <li>Lailis Syafa’ah, act as stakeholder and lecturing in electrical engineering UMM.</li>
-                                    </ul>
+                                    Rumah Sakit Universitas Muhammadiyah Malang mulai dibangun pada tahun 2009.
+                                    Proses pembangunannya dilaksanakan setelah mendapatkan ijin mendirikan bangunan
+                                    (IMB) dari Pemerintah Kabupaten Malang
+                                    melalui unit pelayanan terpadu perizinan Nomor : 180/05989/IMB/421.302/2009.
+                                    Pada bulan Oktober 2012 RS UMM mendapatkan izin Mendirikan Rumah Sakit dari Dinas
+                                    Kesehatan Kabupaten Malang dengan Nomor : 503.1/83/421.103/2012.
+                                    Kemudian pada tanggal 20 Juni 2013
+                                    RS Universitas Muhammadiyah Malang mendapatkan Ijin Operasional Rumah Sakit
+                                    Sementara dengan Nomor : 180/0006/IORS/421.302/2013.
+                                </p>
+                                <h6>Sejarah</h6>
+                                <p>
+                                    Rumah Sakit Universitas Muhammadiyah Malang mulai dibangun pada tahun 2009.
+                                    Proses pembangunannya dilaksanakan setelah mendapatkan ijin mendirikan bangunan
+                                    (IMB) dari Pemerintah Kabupaten Malang
+                                    melalui unit pelayanan terpadu perizinan Nomor : 180/05989/IMB/421.302/2009.
+                                    Pada bulan Oktober 2012 RS UMM mendapatkan izin Mendirikan Rumah Sakit dari Dinas
+                                    Kesehatan Kabupaten Malang dengan Nomor : 503.1/83/421.103/2012.
+                                    Kemudian pada tanggal 20 Juni 2013
+                                    RS Universitas Muhammadiyah Malang mendapatkan Ijin Operasional Rumah Sakit
+                                    Sementara dengan Nomor : 180/0006/IORS/421.302/2013.
+                                    <br>
+                                    Rumah sakit Universitas Muhammadiyah Malang diresmikan pada tanggal 17 Agustus 2013
+                                    bertepatan dengan hari kemerdekaan Republik Indonesia yang ke 68.
+                                    Rumah sakit ini merupakan sarana penunjang pendidikan dan merupakan salah satu
+                                    profit center dari Universitas Muhammadiyah Malang.
+                                    Lokasi rumah sakit tidak jauh dari Kampus 3 Universitas Muhammadiyah Malang yaitu
+                                    tepatnya di sebelah timur terminal Landungsari.
+                                    Berdiri diatas tanah seluas 9 hektare dan memiliki bangunan utama setinggi 6 lantai
+                                    dan beberapa bangunan gedung penunjang setinggi 5 lantai
+                                    dan gedung rawat inap setinggi 3 lantai.
+                                    Bentuk bangunan yang megah dan mewah dengan ciri khas arsitektur tiongkok,
+                                    menjadikan RS Universitas Muhammadiyah Malang ini mudah dikenali.
+                                </p>
+                                <h6>Visi</h6>
+                                <p>
+                                    Menjadi rumah sakit pilihan masyarakat dengan keunggulan dalam pelayanan kesehatan
+                                    komprehensif, bermutu tinggi, aman dan efektif.
+                                </p>
+                                <h6>Misi</h6>
+                                <p>
+                                <ul>
+                                    <li>Menyelenggarakan pelayanan kesehatan secara utuh, terpadu dan bermutu serta meminimalisasi kejadian infeksi</li>
+                                    <li>Menyelenggarakan manajemen dan peningkatan kualitas sumber daya manusia.</li> 
+                                    <li>Penguasaan ilmu dan teknologi serta pengembangan layanan unggulan.</li>
+                                    <li>Memperhatikan dan merespon keluhan/kritik dan hak pasien beserta keluarga</li>
+                                    <li>Menjadi tempat pendidikan dan penelitian tenaga kesehatan dalam rangka
+                                        meningkatkan derajat kesehatan masyarakat.</li>
+                                </ul>
                                 </p>
                             </div>
                         </div>
@@ -67,4 +111,3 @@
     </footer>
 </div>
 {% endblock content %}
-    

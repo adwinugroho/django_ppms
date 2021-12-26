@@ -30,6 +30,12 @@ def faq(request):
     }
     return render(request, "faq.html", context)
 
+def inputData(request):
+    context = {
+        "title": "Input data | Portable Patient Monitoring System",
+    }
+    return render(request, "input-data.html", context)
+
 
 def patient(request):
 
