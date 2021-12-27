@@ -35,7 +35,8 @@
                         </div>
                         <div class="card-content">
                             <div class="card-body">
-                                <form class="form">
+                                <form class="form" action="{% url 'input_data' %}" method="post">
+                                    {% csrf_token %}
                                     <div class="row">
                                         <div class="col-md-12 col-12">
                                             <div class="form-group">
@@ -67,51 +68,15 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-12">
+                                        <div class="col-md-12 col-12">
                                             <div class="form-group">
-                                                <label for="systolic-floating">Systolic</label>
-                                                <input type="number" id="systolic-floating" class="form-control"
-                                                    name="systolic-floating" placeholder="Systolic">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="diastolic-floating">Diastolic</label>
-                                                <input type="number" id="diastolic-floating" class="form-control"
-                                                    name="diastolic-floating" placeholder="Diastolic">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="temperature-floating">Temperature</label>
-                                                <input type="number" id="temperature-floating" class="form-control"
-                                                    name="temperature-floating" placeholder="Temperature" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="saturation-floating">Oxygen Saturation</label>
-                                                <input type="number" id="saturation-floating" class="form-control"
-                                                    name="saturation-floating" placeholder="Oxygen Saturation" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="heart-rate-floating">Heart Rate</label>
-                                                <input type="number" id="heart-rate-floating" class="form-control"
-                                                    name="heart-rate-floating" placeholder="Heart Rate" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="respiration rate-floating">Respiration Rate</label>
-                                                <input type="number" id="respiration rate-floating" class="form-control"
-                                                    name="respiration rate-floating" placeholder="Respiration Rate" readonly>
+                                                <label for="vln rate-floating">Vehicle License Number</label>
+                                                <input type="number" id="vln rate-floating" class="form-control"
+                                                    name="vln rate-floating" placeholder="{{ licenseNumber }}" value="{{ licenseNumber }}" readonly>
                                             </div>
                                         </div>
                                         <div class="col-12 d-flex justify-content-end">
-                                            <button type="submit"
-                                                class="btn btn-primary me-1 mb-1">Submit</button>
+                                            <input type="submit" class="btn btn-primary me-1 mb-1" value="submit"/>
                                             <button type="reset"
                                                 class="btn btn-light-secondary me-1 mb-1">Reset</button>
                                         </div>
