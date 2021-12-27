@@ -10,6 +10,6 @@ urlpatterns = [
     path('dashboard', views.dashboard, name='dashboard'),
     path('about', views.about),
     path('faq', views.faq),
-    path('input-data', views.inputData, name='input_data'),
+    path('input-data', views.submitPatient, name='input_data'),
     path('patient', views.patient)
 ]
