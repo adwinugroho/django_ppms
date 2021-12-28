@@ -84,10 +84,10 @@ def submitPatient(request):
     sock.connect((bd_addr, port))
     jam_file = str(datetime.now().strftime('%Y%m%d_%H%M'))
     # testing with dummy data
-    # suhu = '0'
-    # spo = '0'
-    # resp = '0'
-    # hr = '0'
+    suhu = '0'
+    spo = '0'
+    resp = '0'
+    hr = '0'
     a = sock.recv(1024)
     jam = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     c = '' 
