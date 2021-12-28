@@ -35,8 +35,7 @@ def dashboard(request):
         sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM ) 
         sock.connect((macAddress, get_port))
         a = sock.recv(1024)
-        lenRecv = len(a)
-        request.session['recv'] = lenRecv
+        request.session['recv'] = a
         context = {
             "title": "Dashboard | Portable Patient Monitoring System",
             "name": name,
@@ -102,7 +101,7 @@ def submitPatient(request):
     getRecv = request.session["recv"]
     jam = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     c = '' 
-    for i in range(getRecv):
+    for i in range(len(getRecv)):
         c = c + ' ' + str(getRecv[i])
             # f.writelines('\n')
             # f.writelines(jam + ' ' +str(len(a)) +' ' + c)
