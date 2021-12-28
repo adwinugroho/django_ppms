@@ -108,15 +108,15 @@ def submitPatient(request):
             # f.writelines(jam + ' ' +str(len(a)) +' ' + c)
             
             #grab data
-        index = len(a)
+        index = len(getRecv)
         if index is 6:
-            if a[5] in range (232,238):
-                    resp = str(a[4])
+            if getRecv[5] in range (232,238):
+                    resp = str(getRecv[4])
         elif index is 8:
-            suhu = str(a[5]) + '.' + str(a[6])
+            suhu = str(getRecv[5]) + '.' + str(getRecv[6])
         elif index is 16:
-            spo = str(a[13])
-            hr = str(a[14])
+            spo = str(getRecv[13])
+            hr = str(getRecv[14])
         #cross check data
         if float(suhu) < 25 or float(suhu) > 40:
             suhu = '0'
