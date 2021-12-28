@@ -42,7 +42,7 @@
                                             <div class="form-group">
                                                 <label for="patient-name-column">Patient Name</label>
                                                 <input type="text" id="patient-name-column" class="form-control"
-                                                    placeholder="Patient Name" name="patient_name" required>
+                                                    name="patient_name" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12 col-12">
@@ -56,7 +56,7 @@
                                             <div class="form-group">
                                                 <label for="date-of-birth-floating">Date of Birth</label>
                                                 <input type="date" id="date-of-birth-floating" class="form-control"
-                                                    name="date-of-birth-floating" placeholder="Date of Birth">
+                                                    name="date-of-birth-floating" name="dob" >
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
@@ -71,8 +71,8 @@
                                         <div class="col-md-12 col-12">
                                             <div class="form-group">
                                                 <label for="vln rate-floating">Vehicle License Number</label>
-                                                <input type="number" id="vln rate-floating" class="form-control"
-                                                    name="vln rate-floating" placeholder="{{ licenseNumber }}" value="{{ licenseNumber }}" readonly>
+                                                <input type="text" id="vln rate-floating" class="form-control"
+                                                    name="vln rate-floating" value="{{ licenseNumber }}" readonly>
                                             </div>
                                         </div>
                                         <div class="col-12 d-flex justify-content-end">
