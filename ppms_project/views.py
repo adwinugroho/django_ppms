@@ -1,9 +1,9 @@
-from django.shortcuts import render
-from raspberry_pi import get_data
-from .forms import LoginForm
 import bluetooth
 import time
 from datetime import datetime
+from django.shortcuts import render
+from raspberry_pi import get_data
+from .forms import LoginForm
 # from escpos.printer import Usb
 
 def about(request):
