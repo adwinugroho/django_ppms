@@ -31,7 +31,7 @@ def dashboard(request):
         request.session['macAddress'] = macAddress
         request.session['port'] = port
         get_port = int(port)
-        print("port: ", get)
+        print("port: ", get_port)
         sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM ) 
         sock.connect((bd_addr, get_port))
         a = sock.recv(1024)
