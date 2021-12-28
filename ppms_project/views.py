@@ -76,9 +76,9 @@ def patient(request):
 
 def submitPatient(request):
     # get from session login
-    bd_addr = request.session['macAddress']
+    bd_addr = "34:81:F4:6B:F1:01"
     print("mac address: ", bd_addr)
-    port = int(request.session['port'])
+    port = 6
     print("port: ", port)
     sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
     sock.connect((bd_addr, port))
