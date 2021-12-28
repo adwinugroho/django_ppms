@@ -103,7 +103,7 @@ def submitPatient(request):
     jam = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     c = '' 
     for i in range(getRecv):
-        c = c + ' ' + str(a[i])
+        c = c + ' ' + str(getRecv[i])
             # f.writelines('\n')
             # f.writelines(jam + ' ' +str(len(a)) +' ' + c)
             
