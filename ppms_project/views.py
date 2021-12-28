@@ -82,6 +82,7 @@ def submitPatient(request):
     print("port: ", port)
     sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
     sock.connect((bd_addr, port))
+    print('Connected to ', bd_addr)
     jam_file = str(datetime.now().strftime('%Y%m%d_%H%M'))
     # testing with dummy data
     suhu = '0'
