@@ -82,7 +82,6 @@ def submitPatient(request):
     print("port: ", port)
     sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
     sock.connect((bd_addr, port))
-    print('Connected to ', bd_addr)
     jam_file = str(datetime.now().strftime('%Y%m%d_%H%M'))
     # testing with dummy data
     suhu = '0'
@@ -96,12 +95,12 @@ def submitPatient(request):
         c = c + ' ' + str(a[i])
         #grab data
         index = len(a)
-        if index == 6:
+        if index is 6:
             if a[5] in range (232,238):
                 resp = str(a[4])
-        elif index == 8:
+        elif index is 8:
             suhu = str(a[5]) + '.' + str(a[6])
-        elif index == 16:
+        elif index is 16:
             spo = str(a[13])
             hr = str(a[14])
         
