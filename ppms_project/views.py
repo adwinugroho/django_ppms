@@ -34,8 +34,6 @@ def dashboard(request):
         print("port: ", get_port)
         sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM ) 
         sock.connect((macAddress, get_port))
-        a = sock.recv(1024)
-        request.session['recv'] = a
         context = {
             "title": "Dashboard | Portable Patient Monitoring System",
             "name": name,
@@ -97,25 +95,25 @@ def submitPatient(request):
     resp = '0'
     hr = '0'
 
-    # a = sock.recv(1024)
-    getRecv = request.session["recv"]
+    a = sock.recv(1024)
+    # getRecv = request.session["recv"]
     jam = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     c = '' 
-    for i in range(len(getRecv)):
-        c = c + ' ' + str(getRecv[i])
+    for i in range(len(a)):
+        c = c + ' ' + str(a[i])
             # f.writelines('\n')
             # f.writelines(jam + ' ' +str(len(a)) +' ' + c)
             
             #grab data
-        index = len(getRecv)
+        index = len(a)
         if index is 6:
-            if getRecv[5] in range (232,238):
-                    resp = str(getRecv[4])
+            if a[5] in range (232,238):
+                    resp = str(a[4])
         elif index is 8:
-            suhu = str(getRecv[5]) + '.' + str(getRecv[6])
+            suhu = str(a[5]) + '.' + str(a[6])
         elif index is 16:
-            spo = str(getRecv[13])
-            hr = str(getRecv[14])
+            spo = str(a[13])
+            hr = str(a[14])
         #cross check data
         if float(suhu) < 25 or float(suhu) > 40:
             suhu = '0'
