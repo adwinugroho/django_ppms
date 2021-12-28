@@ -120,7 +120,7 @@ def submitPatient(request):
     # # end for
     # # close connection sock
     # sock.close()
-    get_data()
+    # get_data()
     # init and save to session
     request.session['jam'] = get_data.jam
     request.session['suhu'] = get_data.suhu
