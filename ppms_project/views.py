@@ -30,10 +30,10 @@ def dashboard(request):
         request.session['licenseNumber'] = loginForm.data['licenseNumber']
         request.session['macAddress'] = macAddress
         request.session['port'] = port
-        get_port = int(port)
-        print("port: ", get_port)
-        sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM ) 
-        sock.connect((macAddress, get_port))
+        # get_port = int(port)
+        # print("port: ", get_port)
+        # sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM ) 
+        # sock.connect((macAddress, get_port))
         context = {
             "title": "Dashboard | Portable Patient Monitoring System",
             "name": name,
@@ -64,6 +64,9 @@ def faq(request):
     return render(request, "faq.html", context)
 
 def inputData(request):
+    sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM ) 
+    sock.connect((bd_addr, port))
+    sock.close()
     context = {
         "title": "Input data | Portable Patient Monitoring System",
     }
@@ -80,14 +83,14 @@ def patient(request):
 
 def submitPatient(request):
     # get from session login
-    # bd_addr = request.session['macAddress']
-    # print("mac address: ", bd_addr)
-    # port = int(request.session['port'])
-    # print("port: ", port)
-    # sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM ) 
-    # sock.connect((bd_addr, port))
+    bd_addr = request.session['macAddress']
+    print("mac address: ", bd_addr)
+    port = int(request.session['port'])
+    print("port: ", port)
+    sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM ) 
+    sock.connect((bd_addr, port))
     jam_file = str(datetime.now().strftime('%Y%m%d_%H%M'))
-    # print('Connected to ', bd_addr)
+    print('Connected to ', bd_addr)
 
     #define variabel
     suhu = '0'
