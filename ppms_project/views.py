@@ -30,6 +30,13 @@ def dashboard(request):
         request.session['licenseNumber'] = loginForm.data['licenseNumber']
         request.session['macAddress'] = macAddress
         request.session['port'] = port
+        get_port = int(port)
+        print("port: ", get)
+        sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM ) 
+        sock.connect((bd_addr, get_port))
+        a = sock.recv(1024)
+        lenRecv = len(a)
+        request.session['recv'] = lenRecv
         context = {
             "title": "Dashboard | Portable Patient Monitoring System",
             "name": name,
@@ -76,14 +83,14 @@ def patient(request):
 
 def submitPatient(request):
     # get from session login
-    bd_addr = request.session['macAddress']
-    print("mac address: ", bd_addr)
-    port = int(request.session['port'])
-    print("port: ", port)
-    sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
-    sock.connect((bd_addr, port))
+    # bd_addr = request.session['macAddress']
+    # print("mac address: ", bd_addr)
+    # port = int(request.session['port'])
+    # print("port: ", port)
+    # sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM ) 
+    # sock.connect((bd_addr, port))
     jam_file = str(datetime.now().strftime('%Y%m%d_%H%M'))
-    print('Connected to ', bd_addr)
+    # print('Connected to ', bd_addr)
 
     #define variabel
     suhu = '0'
@@ -91,10 +98,11 @@ def submitPatient(request):
     resp = '0'
     hr = '0'
 
-    a = sock.recv(1024)
+    # a = sock.recv(1024)
+    getRecv = request.session["recv"]
     jam = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     c = '' 
-    for i in range(len(a)):
+    for i in range(getRecv):
         c = c + ' ' + str(a[i])
             # f.writelines('\n')
             # f.writelines(jam + ' ' +str(len(a)) +' ' + c)
