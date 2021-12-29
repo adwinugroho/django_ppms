@@ -64,9 +64,9 @@ def faq(request):
     return render(request, "faq.html", context)
 
 def inputData(request):
-    sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM ) 
-    sock.connect((bd_addr, port))
-    sock.close()
+    # sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM ) 
+    # sock.connect((bd_addr, port))
+    # sock.close()
     context = {
         "title": "Input data | Portable Patient Monitoring System",
     }
