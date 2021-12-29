@@ -98,57 +98,57 @@ def submitPatient(request):
     spo = '0'
     resp = '0'
     hr = '0'
-
-    a = sock.recv(1024)
-    # getRecv = request.session["recv"]
-    jam = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    c = '' 
-    for i in range(len(a)):
-        c = c + ' ' + str(a[i])
-            # f.writelines('\n')
-            # f.writelines(jam + ' ' +str(len(a)) +' ' + c)
-            
-            #grab data
-        index = len(a)
-        if index is 6:
-            if a[5] in range (232,238):
-                    resp = str(a[4])
-        elif index is 8:
-            suhu = str(a[5]) + '.' + str(a[6])
-        elif index is 16:
-            spo = str(a[13])
-            hr = str(a[14])
-        #cross check data
-        if float(suhu) < 25 or float(suhu) > 40:
-            suhu = '0'
-            
-        if float(spo) > 100:
-            spo = '0'
-            
-        if float(hr) > 100:
-            hr = '0'
-            
-        if float(resp) > 25:
-            resp = '0'
-        print(jam, suhu, spo, hr, resp)
-            
-    sock.close()
-    # f.close()
-    # init and save to session
-    request.session['jam'] = jam
-    request.session['suhu'] = suhu
-    request.session['spo'] = spo
-    request.session['hr'] = hr
-    request.session['resp'] = resp
-    context = {
-        "title": "Input data | Portable Patient Monitoring System",
-        "jam": jam,
-        "suhu": suhu,
-        "spo": spo,
-        "hr": hr,
-        "resp": resp
-    }
-    return render(request, "input-data.html", context)
+    while float(suhu) <= 0:
+        a = sock.recv(1024)
+        # getRecv = request.session["recv"]
+        jam = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        c = '' 
+        for i in range(len(a)):
+            c = c + ' ' + str(a[i])
+                # f.writelines('\n')
+                # f.writelines(jam + ' ' +str(len(a)) +' ' + c)
+                
+                #grab data
+            index = len(a)
+            if index is 6:
+                if a[5] in range (232,238):
+                        resp = str(a[4])
+            elif index is 8:
+                suhu = str(a[5]) + '.' + str(a[6])
+            elif index is 16:
+                spo = str(a[13])
+                hr = str(a[14])
+            #cross check data
+            if float(suhu) < 25 or float(suhu) > 40:
+                suhu = '0'
+                
+            if float(spo) > 100:
+                spo = '0'
+                
+            if float(hr) > 100:
+                hr = '0'
+                
+            if float(resp) > 25:
+                resp = '0'
+            print(jam, suhu, spo, hr, resp)
+        else:
+            sock.close()
+            # f.close()
+            # init and save to session
+            request.session['jam'] = jam
+            request.session['suhu'] = suhu
+            request.session['spo'] = spo
+            request.session['hr'] = hr
+            request.session['resp'] = resp
+            context = {
+                "title": "Input data | Portable Patient Monitoring System",
+                "jam": jam,
+                "suhu": suhu,
+                "spo": spo,
+                "hr": hr,
+                "resp": resp
+            }
+            return render(request, "input-data.html", context)
 
 # def submitPatient(request):
     # get from session login
