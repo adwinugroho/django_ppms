@@ -1,5 +1,6 @@
 import bluetooth
 import time
+import subprocess
 from datetime import datetime
 from django.shortcuts import render
 from raspberry_pi import test_get_data
@@ -98,7 +99,7 @@ def submitPatient(request):
     spo = '0'
     resp = '0'
     hr = '0'
-    while float(suhu) <= 0:
+    while True:
         a = sock.recv(1024)
         # getRecv = request.session["recv"]
         jam = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -173,6 +174,10 @@ def submitPatient(request):
     #     "resp": resp
     # }
     # return render(request, "input-data.html", context)
+
+
+def submitPatientV2(request):
+    pass
 
 def calcAge(strBirthDate):
     b_date = datetime.strptime(strBirthDate, '%d/%m/%Y')
