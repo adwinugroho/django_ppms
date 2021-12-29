@@ -99,7 +99,7 @@ def submitPatient(request):
     spo = '0'
     resp = '0'
     hr = '0'
-    while True:
+    while float(suhu) <= 0:
         a = sock.recv(1024)
         # getRecv = request.session["recv"]
         jam = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -132,24 +132,24 @@ def submitPatient(request):
             if float(resp) > 25:
                 resp = '0'
             print(jam, suhu, spo, hr, resp)
-        else:
-            sock.close()
-            # f.close()
-            # init and save to session
-            request.session['jam'] = jam
-            request.session['suhu'] = suhu
-            request.session['spo'] = spo
-            request.session['hr'] = hr
-            request.session['resp'] = resp
-            context = {
-                "title": "Input data | Portable Patient Monitoring System",
-                "jam": jam,
-                "suhu": suhu,
-                "spo": spo,
-                "hr": hr,
-                "resp": resp
-            }
-            return render(request, "input-data.html", context)
+    else:
+        sock.close()
+        # f.close()
+        # init and save to session
+        request.session['jam'] = jam
+        request.session['suhu'] = suhu
+        request.session['spo'] = spo
+        request.session['hr'] = hr
+        request.session['resp'] = resp
+        context = {
+            "title": "Input data | Portable Patient Monitoring System",
+            "jam": jam,
+            "suhu": suhu,
+            "spo": spo,
+            "hr": hr,
+            "resp": resp
+        }
+        return render(request, "input-data.html", context)
 
 # def submitPatient(request):
     # get from session login
