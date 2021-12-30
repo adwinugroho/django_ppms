@@ -284,7 +284,7 @@ def printData(request):
     p.text('\n')
 
     p.text('Temp : ')
-    p.text(str(temp))
+    p.text(str(suhu))
     p.text('\n')
 
     p.cut()
