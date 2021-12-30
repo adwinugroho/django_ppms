@@ -165,7 +165,7 @@ def submitPatient(request):
             return render(request, "input-data.html", context)
 
 def calcAge(strBirthDate):
-    b_date = datetime.strptime(strBirthDate, '%d/%m/%Y')
+    b_date = datetime.strptime(strBirthDate, '%Y-%m-%d')
     umur = (datetime.today() - b_date).days/365
     umurStr = str(umur)
     return umurStr
