@@ -35,7 +35,7 @@
                         </div>
                         <div class="card-content">
                             <div class="card-body">
-                                <form class="form" action="{{% url 'print_data' %}}" method="post">
+                                <form class="form" action="{% url 'print_data' %}" method="post">
                                     <div class="row">
                                         <p>Paramedic: {{ name }}</p>
                                         <p>Gender: {{ gender }}</p>
@@ -51,7 +51,7 @@
                                         <p>Respiration Rate: {{ resp }} </p>
                                         <div class="col-12 d-flex justify-content-end">
                                             <input type="submit" class="btn btn-success me-1 mb-1" value="Print"/>
-                                            <a class="btn btn-light-secondary me-1 mb-1" href="/input-data">Back</a>
+                                            <a class="btn btn-light-secondary me-1 mb-1" href="/patient">Back to Form Patient</a>
                                         </div>
                                     </div>
                                 </form>
