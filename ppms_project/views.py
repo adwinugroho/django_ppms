@@ -143,8 +143,7 @@ def submitPatient(request):
             dob = patientForm.data['dob']
             license_number = patientForm.data["license_number"]
             gender = patientForm.data["gender"]
-        # f.close()
-        # init and save to session
+            
             request.session['jam'] = jam
             request.session['suhu'] = suhu
             request.session['spo'] = spo

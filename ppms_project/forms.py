@@ -8,7 +8,7 @@ class LoginForm(forms.Form):
 class PatientForm(forms.Form):
     patient_name = forms.CharField()
     address = forms.CharField()
-    dob = forms.DateField()
+    dob = forms.CharField()
     gender = forms.CharField()
     license_number = forms.CharField()
     
