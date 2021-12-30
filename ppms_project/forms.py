@@ -11,3 +11,11 @@ class PatientForm(forms.Form):
     dob = forms.DateField()
     gender = forms.CharField()
     license_number = forms.CharField()
+    
+class MeasurementForm(forms.Form):
+    systolic = forms.CharField()
+    diastolic = forms.CharField()
+    temperature = forms.CharField()
+    saturation = forms.CharField()
+    heart_rate = forms.CharField()
+    respiration = forms.CharField()

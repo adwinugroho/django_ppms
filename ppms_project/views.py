@@ -4,7 +4,7 @@ import subprocess
 from datetime import datetime
 from django.shortcuts import render
 from raspberry_pi import test_get_data
-from .forms import LoginForm
+from .forms import LoginForm, PatientForm, MeasurementForm
 # from escpos.printer import Usb
 
 def about(request):
@@ -134,50 +134,36 @@ def submitPatient(request):
             print(jam, suhu, spo, hr, resp)
     else:
         sock.close()
+        
+        if request.method == 'POST':
+            # save to session
+            patientForm = PatientForm(request.POST)
+            patient_name = patientForm.data['patient_name']
+            address = patientForm.data['address']
+            dob = patientForm.data['dob']
+            license_number = patientForm.data["license_number"]
+            gender = patientForm.data["gender"]
         # f.close()
         # init and save to session
-        request.session['jam'] = jam
-        request.session['suhu'] = suhu
-        request.session['spo'] = spo
-        request.session['hr'] = hr
-        request.session['resp'] = resp
-        context = {
-            "title": "Input data | Portable Patient Monitoring System",
-            "jam": jam,
-            "suhu": suhu,
-            "spo": spo,
-            "hr": hr,
-            "resp": resp
-        }
-        return render(request, "input-data.html", context)
-
-# def submitPatient(request):
-    # get from session login
-    # bd_addr = request.session['macAddress']
-    # print("mac address: ", bd_addr)
-    # port = int(request.session['port'])
-    # print("port: ", port)
-  
-    # jam, suhu, spo, hr, resp = test_get_data.run_get_data(bd_addr, port)
-    # # init and save to session
-    # request.session['jam'] = jam
-    # request.session['suhu'] = suhu
-    # request.session['spo'] = spo
-    # request.session['hr'] = hr
-    # request.session['resp'] = resp
-    # context = {
-    #     "title": "Input data | Portable Patient Monitoring System",
-    #     "jam": jam,
-    #     "suhu": suhu,
-    #     "spo": spo,
-    #     "hr": hr,
-    #     "resp": resp
-    # }
-    # return render(request, "input-data.html", context)
-
-
-def submitPatientV2(request):
-    pass
+            request.session['jam'] = jam
+            request.session['suhu'] = suhu
+            request.session['spo'] = spo
+            request.session['hr'] = hr
+            request.session['resp'] = resp
+            request.session['patient_name'] = patient_name
+            request.session['address'] = address
+            request.session['dob'] = dob
+            request.session['license_number'] = license_number
+            request.session['gender'] = gender
+            context = {
+                "title": "Input data | Portable Patient Monitoring System",
+                "jam": jam,
+                "suhu": suhu,
+                "spo": spo,
+                "hr": hr,
+                "resp": resp
+            }
+            return render(request, "input-data.html", context)
 
 def calcAge(strBirthDate):
     b_date = datetime.strptime(strBirthDate, '%d/%m/%Y')
@@ -187,22 +173,55 @@ def calcAge(strBirthDate):
     
 
 def submitMeasurement(request):
-    name = request.session['name']
-    context = {
-        "title": "Input data | Portable Patient Monitoring System",
-        "jam": jam,
-        "suhu": suhu,
-        "spo": spo,
-        "hr": hr,
-        "resp": resp
-    }
-    return render(request, "input-data.html", context)
+    if request.method == 'POST':
+        measurementForm = MeasurementForm(request.POST)
+        patient_name = request.session['patient_name']
+        address = request.session['address']
+        dob = request.session['dob']
+        license_number = request.session['license_number']
+        age = calcAge(dob)
+        request.session['age'] = age[0:2]
+        gender = request.session['gender']
+        suhu = request.session['suhu']
+        spo = request.session['spo']
+        hr = request.session['hr']
+        resp = request.session['resp']
+        sys = measurementForm.data['systolic']
+        dia = measurementForm.data['diastolic']
+        request.session['sys'] = sys
+        request.session['dia'] = dia
+        context = {
+            "title": "Print Data | Portable Patient Monitoring System",
+            "patient_name": patient_name,
+            "address": address,
+            "age": age,
+            "gender": gender,
+            "dia": dia,
+            "sys": sys,
+            "suhu": suhu,
+            "spo": spo,
+            "hr": hr,
+            "resp": resp
+        }
+    return render(request, "view-print.html", context)
 
 # not yet
 def printData(request):
     # get seesion
     name = request.session['name']
     gender = request.session['gender']
+    patient_name = request.session['patient_name']
+    address = request.session['address']
+    dob = request.session['dob']
+    license_number = request.session['license_number']
+    gender = request.session['gender']
+    suhu = request.session['suhu']
+    spo = request.session['spo']
+    hr = request.session['hr']
+    resp = request.session['resp']
+    sys = request.session['sys']
+    dia = request.session['dia']
+    age = request.session['age']
     # setting printer
     idVendor = 0x2730
     idProduct = 0x0fff
@@ -214,7 +233,7 @@ def printData(request):
     p = Usb(0x0416, 0x5011, 0, 0x81, 0x03)
 
     p.text('Nama : ')
-    p.text(name)
+    p.text(patient_name)
     p.text('\n')
 
     p.text('Jenis kelamin : ')
@@ -222,24 +241,24 @@ def printData(request):
     p.text('\n')
 
     p.text('Usia : ')
-    umur = calcAge(strBirthDate)
-    p.text(umurStr[0:2])
+    # umur = calcAge(dob)
+    p.text(age)
     p.text(' Tahun\n')
 
     p.text('Alamat : ')
-    p.text(request["address"])
+    p.text(address)
     p.text('\n')
 
     p.text('Paramedis : ')
-    p.text(request["paramedic"])
+    p.text(name)
     p.text('\n')
 
     p.text('Ambulance : ')
-    p.text(request["ambulance"])
+    p.text(license_number)
     p.text('\n')
 
     p.text('Lama di ambulance : ')
-    p.text(plat)
+    p.text(license_number)
     p.text('\n')
 
     p.text('Data vital pasien : \n')
