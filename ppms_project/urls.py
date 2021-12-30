@@ -11,7 +11,7 @@ urlpatterns = [
     path('about', views.about),
     path('faq', views.faq),
     # run when submit patient
-    path('input-data', views.submitPatient, name='input_data'),
+    path('input-data', views.submitPatient, name='input-data'),
     path('patient', views.patient),
     path('print-data', views.printData, name='print-data'),
     path('submit-measurement', views.submitMeasurement, name='submit-measurement')
