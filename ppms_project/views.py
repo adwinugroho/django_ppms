@@ -5,7 +5,7 @@ from datetime import datetime
 from django.shortcuts import render
 from raspberry_pi import test_get_data
 from .forms import LoginForm, PatientForm, MeasurementForm
-# from escpos.printer import Usb
+from escpos.printer import Usb
 
 def about(request):
     context = {
