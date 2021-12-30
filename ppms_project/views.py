@@ -174,6 +174,7 @@ def calcAge(strBirthDate):
 def submitMeasurement(request):
     if request.method == 'POST':
         measurementForm = MeasurementForm(request.POST)
+        name = request.session['name']
         patient_name = request.session['patient_name']
         address = request.session['address']
         dob = request.session['dob']
@@ -191,6 +192,7 @@ def submitMeasurement(request):
         request.session['dia'] = dia
         context = {
             "title": "Print Data | Portable Patient Monitoring System",
+            "name": name,
             "patient_name": patient_name,
             "address": address,
             "age": age,
