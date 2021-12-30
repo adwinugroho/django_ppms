@@ -36,6 +36,7 @@
                         <div class="card-content">
                             <div class="card-body">
                                 <form class="form" action="{% url 'print_data' %}" method="post">
+                                    {% csrf_token %}
                                     <div class="row">
                                         <p>Paramedic: {{ name }}</p>
                                         <p>Gender: {{ gender }}</p>
