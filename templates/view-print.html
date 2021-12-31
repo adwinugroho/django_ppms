@@ -39,7 +39,6 @@
                                     {% csrf_token %}
                                     <div class="row">
                                         <p>Paramedic: {{ name }}</p>
-                                        <p>Gender: {{ gender }}</p>
                                         <p>Patient Name: {{ patient_name }}</p>
                                         <p>Address: {{ address }}</p>
                                         <p>Age: {{ age }}</p>
@@ -50,7 +49,6 @@
                                         <p>Oxygen Saturation: {{ spo }}</p>
                                         <p>Heart Rate: {{ hr }}</p>
                                         <p>Respiration Rate: {{ resp }} </p>
-                                        <p>Lama di Ambulance: {{ count_time }}</p>
                                         <div class="col-12 d-flex justify-content-end">
                                             <input type="submit" class="btn btn-success me-1 mb-1" value="Print"/>
                                             <a class="btn btn-light-secondary me-1 mb-1" href="/patient">Back to Form Patient</a>

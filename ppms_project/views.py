@@ -91,9 +91,11 @@ def submitPatient(request):
     print("port: ", port)
     sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM ) 
     sock.connect((bd_addr, port))
-    now = datetime.now()
     print('Connected to ', bd_addr)
-    request.session['now_in_patient'] = str(now)
+    # init for waktu lama di ambulance
+    now = datetime.now()
+    nowStr = now.strftime("%Y-%m-%d %H:%M:%S")
+    request.session['now_in_patient'] = nowStr
     #define variabel
     suhu = '0'
     spo = '0'
@@ -190,16 +192,13 @@ def submitMeasurement(request):
         dia = measurementForm.data['diastolic']
         request.session['sys'] = sys
         request.session['dia'] = dia
-        now = datetime.now()
-        time_from_patient = request.session['now_in_patient']
-        #convTimePatientToTime = datetime.strptime(str(time_from_patient), '%Y-%m-%d %H:%M:%S')
-        #count_time = now - convTimePatientToTime
         context = {
             "title": "Print Data | Portable Patient Monitoring System",
             "name": name,
+            "ambulance": license_number,
             "patient_name": patient_name,
             "address": address,
-            "age": age,
+            "age": age[0:2],
             "gender": gender,
             "dia": dia,
             "sys": sys,
@@ -207,7 +206,6 @@ def submitMeasurement(request):
             "spo": spo,
             "hr": hr,
             "resp": resp,
-            "count_time": time_from_patient
         }
     return render(request, "view-print.html", context)
 
@@ -251,13 +249,16 @@ def printData(request):
 
     jam = datetime.now().strftime('%a %Y-%m-%d %H:%M:%S')
     
+    p.text(jam)
+    p.text('\n\n')
+
     p.text('Nama : ')
     p.text(patient_name)
     p.text('\n')
 
     p.text('Jenis kelamin : ')
     p.text(gender)
-    p.text('\n')
+    p.text('\n\n')
 
     p.text('Usia : ')
     # umur = calcAge(dob)
@@ -266,7 +267,7 @@ def printData(request):
 
     p.text('Alamat : ')
     p.text(address)
-    p.text('\n')
+    p.text('\n\n')
 
     p.text('Paramedis : ')
     p.text(name)
@@ -278,7 +279,7 @@ def printData(request):
 
     p.text('Lama di ambulance : ')
     p.text(str(count_time))
-    p.text('\n')
+    p.text('\n\n')
 
     p.text('Data vital pasien : \n')
     p.text('SpO2 : ')
