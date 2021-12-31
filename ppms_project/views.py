@@ -93,7 +93,7 @@ def submitPatient(request):
     sock.connect((bd_addr, port))
     now = datetime.now()
     print('Connected to ', bd_addr)
-    request.session['now_in_patient'] = now
+    request.session['now_in_patient'] = str(now)
     #define variabel
     suhu = '0'
     spo = '0'
