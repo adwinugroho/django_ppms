@@ -207,7 +207,7 @@ def submitMeasurement(request):
             "spo": spo,
             "hr": hr,
             "resp": resp,
-            "count_time": count_time
+            "count_time": str(count_time)
         }
     return render(request, "view-print.html", context)
 
