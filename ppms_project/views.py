@@ -91,9 +91,9 @@ def submitPatient(request):
     print("port: ", port)
     sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM ) 
     sock.connect((bd_addr, port))
-    jam_file = str(datetime.now().strftime('%Y%m%d_%H%M'))
+    now = datetime.now()
     print('Connected to ', bd_addr)
-
+    request.session['now_in_patient'] = now
     #define variabel
     suhu = '0'
     spo = '0'
@@ -190,6 +190,9 @@ def submitMeasurement(request):
         dia = measurementForm.data['diastolic']
         request.session['sys'] = sys
         request.session['dia'] = dia
+        now = datetime.now()
+        time_from_patient = request.session['now_in_patient']
+        count_time = now - time_from_patient
         context = {
             "title": "Print Data | Portable Patient Monitoring System",
             "name": name,
@@ -202,7 +205,8 @@ def submitMeasurement(request):
             "suhu": suhu,
             "spo": spo,
             "hr": hr,
-            "resp": resp
+            "resp": resp,
+            "count_time": count_time
         }
     return render(request, "view-print.html", context)
 
@@ -223,6 +227,9 @@ def printData(request):
     sys = request.session['sys']
     dia = request.session['dia']
     age = request.session['age']
+    time_from_patient = request.session['now_in_patient']
+    now = datetime.now()
+    count_time = now - time_from_patient
     # setting printer
     idVendor = 0x2730
     idProduct = 0x0fff
@@ -259,7 +266,7 @@ def printData(request):
     p.text('\n')
 
     p.text('Lama di ambulance : ')
-    p.text(license_number)
+    p.text(str(count_time))
     p.text('\n')
 
     p.text('Data vital pasien : \n')
@@ -288,3 +295,14 @@ def printData(request):
     p.text('\n')
 
     p.cut()
+    name = request.session['name']
+    macAddress = request.session['macAddress']
+    licenseNumber = request.session['licenseNumber']
+    port = request.session['port']
+    context = {
+        "title": "Dashboard | Portable Patient Monitoring System",
+        "name": name,
+        "macAddress": macAddress,
+        "port": port
+    }
+    return render(request, "dashboard.html", context)
