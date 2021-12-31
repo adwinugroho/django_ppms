@@ -192,7 +192,8 @@ def submitMeasurement(request):
         request.session['dia'] = dia
         now = datetime.now()
         time_from_patient = request.session['now_in_patient']
-        count_time = now - time_from_patient
+        convTimePatientToTime = datetime.strptime(time_from_patient, '%Y-%m-%d %H:%M:%S')
+        count_time = now - convTimePatientToTime
         context = {
             "title": "Print Data | Portable Patient Monitoring System",
             "name": name,
@@ -228,8 +229,9 @@ def printData(request):
     dia = request.session['dia']
     age = request.session['age']
     time_from_patient = request.session['now_in_patient']
+    convTimePatientToTime = datetime.strptime(time_from_patient, '%Y-%m-%d %H:%M:%S')
     now = datetime.now()
-    count_time = now - time_from_patient
+    count_time = now - convTimePatientToTime
     # setting printer
     idVendor = 0x2730
     idProduct = 0x0fff
