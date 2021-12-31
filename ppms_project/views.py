@@ -240,6 +240,15 @@ def printData(request):
     #p = Usb(idVendor, idProduct, 0, inpoint, outpoint)
     p = Usb(0x0416, 0x5011, 0, 0x81, 0x03)
 
+    p.text('        RUMAH SAKIT UMM')
+    p.text('\n')
+    p.text('     www.hospital.umm.ac.id')
+    p.text('\n')
+    p.text('Jl. Raya Tlogomas No. 45 Malang')
+    p.text('\n\n')
+
+    jam = datetime.now().strftime('%a %Y-%m-%d %H:%M:%S')
+    
     p.text('Nama : ')
     p.text(patient_name)
     p.text('\n')
@@ -293,7 +302,7 @@ def printData(request):
     p.text('Temp : ')
     p.text(str(suhu))
     p.text('\n')
-
+    p.text('   ~ Pelayananku, pengabdianku ~')
     p.cut()
     name = request.session['name']
     macAddress = request.session['macAddress']
