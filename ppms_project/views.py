@@ -149,6 +149,8 @@ def submitPatient(request):
         request.session['dob'] = dob
         request.session['license_number'] = license_number
         request.session['gender'] = gender
+        
+        suhu = request.session['suhu']
         context = {
             "title": "Input data | Portable Patient Monitoring System",
             "suhu": suhu,
