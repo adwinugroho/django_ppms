@@ -115,6 +115,7 @@ def submitPatient(request):
     sock.close()
     pid = int(request.session['pid'])
     os.kill(pid, signal.SIGINT)
+    
     # sock.connect((bd_addr, port))
     # print('Connected to ', bd_addr)
     
@@ -230,7 +231,6 @@ def printData(request):
     convTimePatientToTime = datetime.strptime(time_from_patient, '%Y-%m-%d %H:%M:%S')
     now = datetime.now()
     count_time = now - convTimePatientToTime
-    # setting printer
     idVendor = 0x2730
     idProduct = 0x0fff
     inpoint = 0x81
@@ -307,17 +307,6 @@ def printData(request):
     p.text('\n')
     p.text('   ~ Pelayananku, pengabdianku ~')
     p.cut()
-    name = request.session['name']
-    macAddress = request.session['macAddress']
-    licenseNumber = request.session['licenseNumber']
-    port = request.session['port']
-    context = {
-        "title": "Dashboard | Portable Patient Monitoring System",
-        "name": name,
-        "macAddress": macAddress,
-        "port": port
-    }
-    return render(request, "dashboard.html", context)
 
 
 def logout(request):
