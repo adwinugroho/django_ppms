@@ -48,7 +48,7 @@ def dashboard(request):
             "macAddress": macAddress,
             "port": port
         }
-        with open('/home/pi/Documents/PPMS/py3/django_ppms/raspberry_pi/file_login.txt') as fl:
+        with open('/home/pi/Documents/PPMS/py3/django_ppms/raspberry_pi/file_login.txt', 'a') as fl:
             fl.writelines(macAddress)
             fl.writelines(port)
             fl.close()
