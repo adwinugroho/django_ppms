@@ -7,6 +7,13 @@ from raspberry_pi import test_get_data
 from .forms import LoginForm, PatientForm, MeasurementForm
 from escpos.printer import Usb
 
+
+# func running in background
+def run_program(program):
+    # Start the external program
+    subprocess.Popen(program)
+    
+
 def about(request):
     context = {
         "title": "About | Portable Patient Monitoring System",
@@ -41,6 +48,11 @@ def dashboard(request):
             "macAddress": macAddress,
             "port": port
         }
+        with open('/home/pi/Documents/PPMS/py3/django_ppms/raspberry_pi/file_login.txt') as fl:
+            fl.writelines(macAddress)
+            fl.writelines(port)
+            fl.close()
+            
         return render(request, "dashboard.html", context)
     else:
         name = request.session['name']
@@ -75,6 +87,8 @@ def inputData(request):
 
 
 def patient(request):
+    # run get data
+    run_program(['python', '/home/pi/Documents/PPMS/py3/django_ppms/raspberry_pi/tes_get_data.py'])
     licenseNumber = request.session['licenseNumber']
     context = {
         "title": "Patient | Portable Patient Monitoring System",
@@ -89,79 +103,45 @@ def submitPatient(request):
     print("mac address: ", bd_addr)
     port = int(request.session['port'])
     print("port: ", port)
-    sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM ) 
-    sock.connect((bd_addr, port))
-    print('Connected to ', bd_addr)
+    sock = bluetooth.BluetoothSocket( bluetooth.RFCOMM )
+    sock.close() 
+    # sock.connect((bd_addr, port))
+    # print('Connected to ', bd_addr)
     # init for waktu lama di ambulance
     now = datetime.now()
     nowStr = now.strftime("%Y-%m-%d %H:%M:%S")
     request.session['now_in_patient'] = nowStr
-    #define variabel
-    suhu = '0'
-    spo = '0'
-    resp = '0'
-    hr = '0'
-    while float(suhu) <= 0:
-        a = sock.recv(1024)
-        # getRecv = request.session["recv"]
-        jam = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        c = '' 
-        for i in range(len(a)):
-            c = c + ' ' + str(a[i])
-                # f.writelines('\n')
-                # f.writelines(jam + ' ' +str(len(a)) +' ' + c)                
-        #grab data
-        if index is 6:
-            if a[5] in range (232,238):
-                resp = str(a[4])
-        elif index is 8:
-            suhu = str(a[5]) + '.' + str(a[6])
-        elif index is 16:
-            spo = str(a[13])
-            hr = str(a[14])
-        #cross check data
-        if float(suhu) < 25 or float(suhu) > 40:
-            suhu = '0'
-            
-        if float(spo) > 100:
-            spo = '0'
-            
-        if float(hr) > 100:
-            hr = '0'
-            
-        if float(resp) > 25:
-            resp = '0'
-        print(jam, suhu, spo, hr, resp)
-    else:
-        sock.close()
-        if request.method == 'POST':
-            # save to session
-            patientForm = PatientForm(request.POST)
-            patient_name = patientForm.data['patient_name']
-            address = patientForm.data['address']
-            dob = patientForm.data['dob']
-            license_number = patientForm.data["license_number"]
-            gender = patientForm.data["gender"]
-            
-            request.session['jam'] = jam
-            request.session['suhu'] = suhu
-            request.session['spo'] = spo
-            request.session['hr'] = hr
-            request.session['resp'] = resp
-            request.session['patient_name'] = patient_name
-            request.session['address'] = address
-            request.session['dob'] = dob
-            request.session['license_number'] = license_number
-            request.session['gender'] = gender
-            context = {
-                "title": "Input data | Portable Patient Monitoring System",
-                "jam": jam,
-                "suhu": suhu,
-                "spo": spo,
-                "hr": hr,
-                "resp": resp
-            }
-            return render(request, "input-data.html", context)
+    lines = []
+    with open('/home/pi/Documents/PPMS/py3/django_ppms/raspberry_pi/data_from_pi.txt', 'a') as f:
+        lines = f.readlines()
+    print("check last data from pi:", lines[len(lines)-1])
+    if request.method == 'POST':
+        # save to session
+        patientForm = PatientForm(request.POST)
+        patient_name = patientForm.data['patient_name']
+        address = patientForm.data['address']
+        dob = patientForm.data['dob']
+        license_number = patientForm.data["license_number"]
+        gender = patientForm.data["gender"]
+        
+        request.session['jam'] = jam
+        # request.session['suhu'] = suhu
+        # request.session['spo'] = spo
+        # request.session['hr'] = hr
+        # request.session['resp'] = resp
+        request.session['patient_name'] = patient_name
+        request.session['address'] = address
+        request.session['dob'] = dob
+        request.session['license_number'] = license_number
+        request.session['gender'] = gender
+        context = {
+            "title": "Input data | Portable Patient Monitoring System",
+            # "suhu": suhu,
+            # "spo": spo,
+            # "hr": hr,
+            # "resp": resp
+        }
+        return render(request, "input-data.html", context)
 
 def calcAge(strBirthDate):
     b_date = datetime.strptime(strBirthDate, '%Y-%m-%d')

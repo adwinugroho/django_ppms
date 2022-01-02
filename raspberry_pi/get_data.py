@@ -2,7 +2,6 @@ import bluetooth
 import time
 import datetime
 
-# address & port will be inputs by staff
 bd_addr = "34:81:F4:6B:F1:01"
 port = 6
 sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
@@ -15,9 +14,10 @@ suhu = '0'
 spo = '0'
 resp = '0'
 hr = '0'
+cek = True
 
 with open('/home/pi/Documents/PPMS/'+jam_file+'.txt', 'a') as f:
-    while True:
+    while cek is True:
         a = sock.recv(1024)
         jam = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         c = '' 
