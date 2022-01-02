@@ -9,6 +9,8 @@ from escpos.printer import Usb
 import os.path
 import os
 import signal
+import usb.core
+import usb.util
 
 
 # func running in background
@@ -239,6 +241,8 @@ def printData(request):
     # execute print
     #p = Usb(idVendor, idProduct, 0, inpoint, outpoint)
     p = Usb(0x0416, 0x5011, 0, 0x81, 0x03)
+    dev = usb.core.find(idVendor=0x0416, idProduct=0x5011)
+    dev.reset()
 
     p.text('        RUMAH SAKIT UMM')
     p.text('\n')
