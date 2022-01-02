@@ -10,6 +10,8 @@ isExist = os.path.exists('/home/pi/Documents/PPMS/py3/django_ppms/raspberry_pi/f
 if isExist == True:
     with open('/home/pi/Documents/PPMS/py3/django_ppms/raspberry_pi/file_login.txt', 'r') as fl:
         lines = fl.readlines()
+else:
+    open('/home/pi/Documents/PPMS/py3/django_ppms/raspberry_pi/file_login.txt', 'x')
 
 print('Check login file: ', lines)
 if len(lines) >= 2:
