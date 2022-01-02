@@ -7,12 +7,15 @@ from django.shortcuts import render
 from .forms import LoginForm, PatientForm, MeasurementForm
 from escpos.printer import Usb
 import os.path
+import os
+import signal
 
 
 # func running in background
 def run_program(program):
     # Start the external program
-    subprocess.Popen(program)
+    process = subprocess.Popen(program)
+    return process.pid
     
 
 def about(request):
@@ -92,7 +95,8 @@ def inputData(request):
 
 def patient(request):
     # run get data
-    run_program(['python', '/home/pi/Documents/PPMS/py3/django_ppms/raspberry_pi/test_get_data.py'])
+    pid = run_program(['python', '/home/pi/Documents/PPMS/py3/django_ppms/raspberry_pi/test_get_data.py'])
+    request.session['pid'] = pid
     licenseNumber = request.session['licenseNumber']
     context = {
         "title": "Patient | Portable Patient Monitoring System",
@@ -108,7 +112,9 @@ def submitPatient(request):
     port = int(request.session['port'])
     print("port: ", port)
     sock = bluetooth.BluetoothSocket( bluetooth.RFCOMM )
-    sock.close() 
+    sock.close()
+    pid = int(request.session['pid'])
+    os.kill(pid, signal.SIGINT)
     # sock.connect((bd_addr, port))
     # print('Connected to ', bd_addr)
     
@@ -145,7 +151,7 @@ def submitPatient(request):
         request.session['gender'] = gender
         context = {
             "title": "Input data | Portable Patient Monitoring System",
-            # "suhu": suhu,
+            "suhu": suhu,
             # "spo": spo,
             # "hr": hr,
             # "resp": resp
