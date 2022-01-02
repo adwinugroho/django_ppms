@@ -88,7 +88,7 @@ def inputData(request):
 
 def patient(request):
     # run get data
-    run_program(['python', '/home/pi/Documents/PPMS/py3/django_ppms/raspberry_pi/tes_get_data.py'])
+    run_program(['python', '/home/pi/Documents/PPMS/py3/django_ppms/raspberry_pi/test_get_data.py'])
     licenseNumber = request.session['licenseNumber']
     context = {
         "title": "Patient | Portable Patient Monitoring System",
