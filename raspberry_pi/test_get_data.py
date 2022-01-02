@@ -67,7 +67,11 @@ if len(lines) >= 2:
             if float(resp) > 25:
                 resp = '0'
             f.writelines('\n')
-            f.writelines(jam + ' ' +suhu, spo, hr, resp)
+            f.writelines(jam)
+            f.writelines(suhu)
+            f.writelines(spo)
+            f.writelines(hr)
+            f.writelines(resp)
             print(jam, suhu, spo, hr, resp)
             
     sock.close()
