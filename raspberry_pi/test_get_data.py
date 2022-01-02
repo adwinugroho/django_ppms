@@ -3,7 +3,7 @@ import time
 import datetime
 
 lines = []
-with open('/home/pi/Documents/PPMS/py3/django_ppms/raspberry_pi/file_login.txt', 'a') as fl:
+with open('/home/pi/Documents/PPMS/py3/django_ppms/raspberry_pi/file_login.txt', 'r') as fl:
     lines = fl.readlines()
 
 print('Check br address from login file: ', lines[0])    
