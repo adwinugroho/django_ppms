@@ -134,7 +134,7 @@ def submitPatient(request):
         gender = patientForm.data["gender"]
         
         # request.session['jam'] = jam
-        # request.session['suhu'] = suhu
+        request.session['suhu'] = lines[0]
         # request.session['spo'] = spo
         # request.session['hr'] = hr
         # request.session['resp'] = resp

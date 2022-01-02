@@ -40,8 +40,8 @@ if len(lines) >= 2:
             c = '' 
             for i in range(len(a)):
                 c = c + ' ' + str(a[i])
-            f.writelines('\n')
-            f.writelines(jam + ' ' +str(len(a)) +' ' + c)
+            # f.writelines('\n')
+            # f.writelines(jam + ' ' +str(len(a)) +' ' + c)
             
             #grab data
             index = len(a)
@@ -66,6 +66,8 @@ if len(lines) >= 2:
             
             if float(resp) > 25:
                 resp = '0'
+            f.writelines('\n')
+            f.writelines(jam + ' ' +suhu, spo, hr, resp)
             print(jam, suhu, spo, hr, resp)
             
     sock.close()
