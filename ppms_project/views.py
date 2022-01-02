@@ -3,9 +3,10 @@ import time
 import subprocess
 from datetime import datetime
 from django.shortcuts import render
-from raspberry_pi import test_get_data
+#from raspberry_pi import test_get_data
 from .forms import LoginForm, PatientForm, MeasurementForm
 from escpos.printer import Usb
+import os.path
 
 
 # func running in background
@@ -113,10 +114,14 @@ def submitPatient(request):
     now = datetime.now()
     nowStr = now.strftime("%Y-%m-%d %H:%M:%S")
     request.session['now_in_patient'] = nowStr
+    # File process
+    isExist = os.path.exists('/home/pi/Documents/PPMS/py3/django_ppms/raspberry_pi/data_from_pi.txt')
     lines = []
-    with open('/home/pi/Documents/PPMS/py3/django_ppms/raspberry_pi/data_from_pi.txt', 'r') as f:
-        lines = f.readlines()
-    print("check last data from pi:", lines[len(lines)-1])
+    if isExist == True:
+        with open('/home/pi/Documents/PPMS/py3/django_ppms/raspberry_pi/data_from_pi.txt', 'r') as f:
+            lines = f.readlines()
+        print("check last data from pi:", lines[len(lines)-1])
+                
     if request.method == 'POST':
         # save to session
         patientForm = PatientForm(request.POST)

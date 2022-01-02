@@ -3,8 +3,8 @@ import time
 import datetime
 import os.path
 
-sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
-sock.close()
+# sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
+# sock.close()
 lines = []
 isExist = os.path.exists('/home/pi/Documents/PPMS/py3/django_ppms/raspberry_pi/file_login.txt')
 if isExist == True:
