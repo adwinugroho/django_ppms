@@ -5,7 +5,8 @@ import datetime
 lines = []
 with open('/home/pi/Documents/PPMS/py3/django_ppms/raspberry_pi/file_login.txt', 'r') as fl:
     lines = fl.readlines()
-if len(lines) != 0:
+print('Check login file: ', lines)
+if len(lines) < 2:
     print('Check br address from login file: ', lines[0])    
     print('Check port from login file: ', lines[1])
 
