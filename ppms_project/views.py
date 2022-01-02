@@ -16,6 +16,7 @@ def run_program(program):
     
 
 def about(request):
+    del request.session['macAddress']
     context = {
         "title": "About | Portable Patient Monitoring System",
     }
@@ -302,3 +303,11 @@ def printData(request):
         "port": port
     }
     return render(request, "dashboard.html", context)
+
+
+def logout(request):
+    del request.session['macAddress']
+    del request.session['name']
+    del request.session['licenseNumber']
+    del request.session['port']
+    return render(request, 'login.html')
