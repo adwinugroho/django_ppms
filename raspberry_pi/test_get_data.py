@@ -6,7 +6,7 @@ lines = []
 with open('/home/pi/Documents/PPMS/py3/django_ppms/raspberry_pi/file_login.txt', 'r') as fl:
     lines = fl.readlines()
 print('Check login file: ', lines)
-if len(lines) > 2:
+if len(lines) >= 2:
     print('Check br address from login file: ', lines[0])    
     print('Check port from login file: ', lines[1])
 
@@ -25,7 +25,7 @@ if len(lines) > 2:
     hr = '0'
     cek = True
 
-    with open('/home/pi/Documents/PPMS/py3/django_ppms/raspberry_pi/data_from_pi.txt', 'a') as f:
+    with open('/home/pi/Documents/PPMS/py3/django_ppms/raspberry_pi/data_from_pi.txt', 'w') as f:
         while cek is True:
             a = sock.recv(1024)
             jam = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
