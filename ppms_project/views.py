@@ -311,6 +311,11 @@ def printData(request):
     p.text('\n')
     p.text('   ~ Pelayananku, pengabdianku ~')
     p.cut()
+    context = {
+            "title": "Dashboard | Portable Patient Monitoring System",
+            "name": name,
+        }
+    return render(request, "dashboard.html", context)
 
 
 def logout(request):
