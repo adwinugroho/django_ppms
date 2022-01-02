@@ -112,7 +112,7 @@ def submitPatient(request):
     nowStr = now.strftime("%Y-%m-%d %H:%M:%S")
     request.session['now_in_patient'] = nowStr
     lines = []
-    with open('/home/pi/Documents/PPMS/py3/django_ppms/raspberry_pi/data_from_pi.txt', 'a') as f:
+    with open('/home/pi/Documents/PPMS/py3/django_ppms/raspberry_pi/data_from_pi.txt', 'r') as f:
         lines = f.readlines()
     print("check last data from pi:", lines[len(lines)-1])
     if request.method == 'POST':
