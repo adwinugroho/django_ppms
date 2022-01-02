@@ -48,9 +48,11 @@ def dashboard(request):
             "macAddress": macAddress,
             "port": port
         }
+        strPort = str(port)
         with open('/home/pi/Documents/PPMS/py3/django_ppms/raspberry_pi/file_login.txt', 'a') as fl:
             fl.writelines(macAddress)
-            fl.writelines(port)
+            fl.writelines('\n')
+            fl.writelines(strPort)
             fl.close()
             
         return render(request, "dashboard.html", context)
