@@ -111,6 +111,7 @@ def submitPatient(request):
     sock.close() 
     # sock.connect((bd_addr, port))
     # print('Connected to ', bd_addr)
+    
     # init for waktu lama di ambulance
     now = datetime.now()
     nowStr = now.strftime("%Y-%m-%d %H:%M:%S")
@@ -132,7 +133,7 @@ def submitPatient(request):
         license_number = patientForm.data["license_number"]
         gender = patientForm.data["gender"]
         
-        request.session['jam'] = jam
+        # request.session['jam'] = jam
         # request.session['suhu'] = suhu
         # request.session['spo'] = spo
         # request.session['hr'] = hr
