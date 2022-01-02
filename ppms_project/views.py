@@ -140,10 +140,13 @@ def submitPatient(request):
         gender = patientForm.data["gender"]
         
         # request.session['jam'] = jam
-        request.session['suhu'] = lines[0]
-        # request.session['spo'] = spo
-        # request.session['hr'] = hr
-        # request.session['resp'] = resp
+        lastLine = lines[len(lines)-1]
+        splitLastLine = lastLine.split(" ")
+        request.session['suhu'] = splitLastLine[0]
+        request.session['spo'] = splitLastLine[1]
+        request.session['hr'] = splitLastLine[2]
+        request.session['resp'] = splitLastLine[3]
+        
         request.session['patient_name'] = patient_name
         request.session['address'] = address
         request.session['dob'] = dob
@@ -151,12 +154,15 @@ def submitPatient(request):
         request.session['gender'] = gender
         
         suhu = request.session['suhu']
+        spo = request.session['spo']
+        hr = request.session['hr']
+        resp = request.session['resp']
         context = {
             "title": "Input data | Portable Patient Monitoring System",
             "suhu": suhu,
-            # "spo": spo,
-            # "hr": hr,
-            # "resp": resp
+            "spo": spo,
+            "hr": hr,
+            "resp": resp
         }
         return render(request, "input-data.html", context)
 
