@@ -15,5 +15,6 @@ urlpatterns = [
     path('patient', views.patient),
     path('print-data', views.printData, name='print_data'),
     path('submit-measurement', views.submitMeasurement, name='submit_measurement'),
-    path('logout', views.logout, name='logout')
+    path('logout', views.logout, name='logout'),
+    path('front-faq', views.frontFaq)
 ]

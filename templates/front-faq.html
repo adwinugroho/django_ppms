@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href='{% static "/dist/assets/css/bootstrap.css" %}'>
+    <link rel="stylesheet" href='{% static "/dist/assets/vendors/bootstrap-icons/bootstrap-icons.css" %}'>
+    <link rel="stylesheet" href='{% static "/dist/assets/css/app.css" %}'>
+    <link rel="stylesheet" href='{% static "/dist/assets/css/pages/error.css" %}'>
+</head>
+
+<body>
+    <div id="error">
+        
+
+<div class="error-page container">
+    <div class="col-md-8 col-12 offset-md-2">
+        <div class="text-center">
+            <h4 class="error-title">Frequently Asked Question</h4>
+        </div>
+        <p>
+            PM 6100 adalah alat monitoring pasien yang dibuat oleh BERRY med yang didesain dalam
+            bentuk yang ringkas. Alat ini dilengkapi dengan baterai tanam agar mudah
+            dioperasikan secara mandiri.
+            Penjelasan antar muka dari PM6100 antara lain:
+        <ol>
+            <li>
+                Status bunyi beep
+                <ul>
+                    <li>Gambar speaker berarti alat akan mengeluarkan bunyi beep</li>
+                    <li>Gambar speaker dicoret berarti alat tidak mengeluarkan bunyi beep</li>
+                </ul>
+            </li>
+            <li>
+                Status Bluetooth
+                <ul>
+                    <li>Apabila logo bluetooth berkedip menandakan belum tersambung</li>
+                    <li>Apabila logo bluetooth tidak berkedip menandakan sudah tersambung</li>
+                </ul>
+            </li>
+            <li>Status baterai</li>
+            <li>Menu bunyi beep, pilih menu ini untuk menyalakan atau mematikan bunyi beep</li>                           
+            <li>Menu bluetoth, pilih menu ini untuk menyalakan atau mematikan bluetooth</li>
+            <li>Menu untuk memulai pengukuran tensi</li>
+            <li>Menu off, pilih menu ini untuk mematikan alat</li>
+            <li>Hasil pengukuran PM 6100</li>
+        </ol>
+        </p>
+            <div class="text-center">
+            <a href="/" class="btn btn-lg btn-outline-primary mt-3">Go Login</a>
+        </div>
+    </div>
+</div>
+
+
+    </div>
+</body>
+
+</html>

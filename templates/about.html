@@ -35,18 +35,39 @@
                         </div>
                         <div class="card-content">
                             <div class="card-body">
+                                <h5>About</h5>
                                 <p>
-                                    PPMS team composed by:
-                                    <ul>
-                                        <li>Prof. Dr. Ir. Mauridhi Hery Purnomo, M.Eng, act as team leader</li>
-                                        <li>Diah Risqiwati, act as co-applicant</li>
-                                        <li>Wiwik Anggraeni, act as secretary project.</li>
-                                        <li>Lailatul Husniah. act as secretary treasure officer.</li>
-                                        <li>Sugiyanto, act as hardware engineer.</li>
-                                        <li>Hanugra Aulia Sidharta, act as software engineer.</li>
-                                        <li>Lailis Syafa’ah, act as stakeholder and lecturing in electrical engineering UMM.</li>
-                                    </ul>
+                                    PPMS (Portable Patient Monitoring System) adalah proyek kerjasama antara Institut
+                                    Teknologi Sepuluh Nopember (ITS) dengan Rumah Sakit Universitas Muhammadiah Malang
+                                    (RS UMM) dengan pendanaan dari Institute of Electrical and Electronics Engineers
+                                    (IEEE) Special Interest Group in Humanitarian Technology (IEEE SIGHT) dengan tahun
+                                    anggaran 2021.
+                                    Proyek ini dipimpin oleh Prof.Dr.Ir. Mauridhi Hery Purnomo, M.Eng selaku Professor
+                                    pada bidang Kecerdasan buatan pada Biomedik ITS dan Senior Member IEEE Indonesian
+                                    Section. Dengan dukungan Diah Risqiwati, ST., MT sebagai wakil ketua, Lailatul
+                                    Husniah, S.ST., MT sebagai bendahara, Hanugra Aulia Sidharta, ST, M.MT sebagai
+                                    penanggung jawab teknis, Wiwik Anggraeni S.Si.,M.Kom sebagai sekretaris, Sugiyanto,
+                                    M.Kom sebagai penanggung jawab teknis dan Dr., Hj. Lailis Syafa'ah, MT sebagai
+                                    narahubung dengan RS UMM.
+                                    <br>
+                                    Alat ini dibuat untuk membantu melakukan monitoring terhadap pasien selama berada di
+                                    dalam ambulan hingga tiba di Rumah Sakit. Sejak wabah CoVid 19 melanda Indonesia
+                                    terjadi penumpukan pasien yang tiba di ruang gawat darurat Rumah Sakit, untuk
+                                    mengurangi penumpukan antrian di Rumah Sakit di ruang gawat darurat maka kami
+                                    mengusulkan pembuatan PPMS. Dengan adanya PPMS maka diharapkan tanda vital dari
+                                    pasien dapat diamati sejak di ambulan sehingga ketika sampai di ruang gawat darurat
+                                    paramedis mendapatkan gambaran awal kondisi pasien.
                                 </p>
+                                <h5>Penjelasan Alat</h5>
+                                <p>
+                                    PPMS dikemas dalam koper yang berisikan tiga buah alat, antara lain BERRY PM 6100, Raspberry Pi 4 dan sebuah printer
+                                    thermal. PM 6100 digunakan sebagai alat untuk monitor tanda vital dari pasien, ada 6 tanda vital yang dapat diamati,
+                                    antara lain: SpO2, Heart Rate, Systole, Diastole, Respiratory dan suhu tubuh. Raspberry Pi 4 berfungsi sebagai alat
+                                    pemroses tanda vital pasien dari PM 6100 menggunakan media nirkabel Bluetooth. Data tersebut dapat dicetak menggunakan
+                                    printer thermal saat pasien telah tiba di rumah sakit. Semua data tersebut diakses oleh paramedis melalui website ini.
+                                </p>
+                                <img src='{% static "/dist/assets/images/bg/drone_gedung_utama1.jpg" %}'
+                                    style="width: 300px; height: 300px;" alt="umm">
                             </div>
                         </div>
                     </div>
@@ -61,11 +82,7 @@
             <div class="float-start">
                 <p>2021 &copy; All right reserved.</p>
             </div>
-            <div class="float-end">
-                <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i> in Samarinda</span></p>
-            </div>
         </div>
     </footer>
 </div>
 {% endblock content %}
-    

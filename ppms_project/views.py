@@ -57,9 +57,11 @@ def dashboard(request):
         }
         strPort = str(port)
         with open('/home/pi/Documents/PPMS/py3/django_ppms/raspberry_pi/file_login.txt', 'a') as fl:
+            fl.write('\n')
             fl.writelines(macAddress)
             fl.writelines('\n')
             fl.writelines(strPort)
+            fl.writelines('\n')
             fl.close()
             
         return render(request, "dashboard.html", context)
@@ -75,6 +77,13 @@ def dashboard(request):
             "port": port
         }
         return render(request, "dashboard.html", context)
+    
+    
+def frontFaq(request):
+    context = {
+        "title": "FAQ | Portable Patient Monitoring System",
+    }
+    return render(request, "front-faq.html", context)
 
 def faq(request):
     # get name from session
@@ -143,7 +152,7 @@ def submitPatient(request):
         gender = patientForm.data["gender"]
         
         # request.session['jam'] = jam
-        lastLine = lines[len(lines)-1]
+        lastLine = lines[len(lines)-2]
         splitLastLine = lastLine.split(" ")
         request.session['suhu'] = splitLastLine[0]
         request.session['spo'] = splitLastLine[1]
@@ -312,10 +321,9 @@ def printData(request):
     p.text('   ~ Pelayananku, pengabdianku ~')
     p.cut()
     context = {
-            "title": "Dashboard | Portable Patient Monitoring System",
-            "name": name,
-        }
-    return render(request, "dashboard.html", context)
+        "title": "Login | Portable Patient Monitoring System",
+    }
+    return render(request, "login.html", context)
 
 
 def logout(request):
@@ -323,4 +331,7 @@ def logout(request):
     del request.session['name']
     del request.session['licenseNumber']
     del request.session['port']
-    return render(request, 'login.html')
+    context = {
+        "title": "Login | Portable Patient Monitoring System",
+    }
+    return render(request, "login.html", context)
