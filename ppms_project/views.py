@@ -238,6 +238,8 @@ def printData(request):
     sys = request.session['sys']
     dia = request.session['dia']
     age = request.session['age']
+    macAddress = request.session['macAddress']
+    port = request.session['port']
     time_from_patient = request.session['now_in_patient']
     convTimePatientToTime = datetime.strptime(time_from_patient, '%Y-%m-%d %H:%M:%S')
     now = datetime.now()
@@ -321,9 +323,12 @@ def printData(request):
     p.text('   ~ Pelayananku, pengabdianku ~')
     p.cut()
     context = {
-        "title": "Login | Portable Patient Monitoring System",
-    }
-    return render(request, "login.html", context)
+            "title": "Dashboard | Portable Patient Monitoring System",
+            "name": name,
+            "macAddress": macAddress,
+            "port": port
+        }
+    return render(request, "dashboard.html", context)
 
 
 def logout(request):
