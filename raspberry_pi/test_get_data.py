@@ -19,7 +19,7 @@ if len(lines) >= 2:
     print('Check port from login file: ', lines[1])
 
     intPort = int(lines[1])
-    bd_addr = lines[0][0:-1] #salahnya disini, ketika dicetak bt addd ada \n
+    bd_addr = lines[-2][0:-1]
     port = intPort
     sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
     sock.connect((bd_addr, port))
